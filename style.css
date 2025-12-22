@@ -1,0 +1,164 @@
+body {
+    background-color: #1B3C53;
+    color: #E3E3E3;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: none;
+    overflow: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between; /* links, mitte, rechts */
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #456882;
+    width: 100%;
+    flex-wrap: wrap;  /* kleine Bildschirme */
+}
+
+.LogoText {
+    font-family: "Montserrat", sans-serif;
+    font-size: 5vw;    /* skaliert mit Bildschirmbreite */
+    font-weight: 700;
+    margin: 0;
+    line-height: 1;
+}
+
+.SocialMediaSum {
+    text-align: center;
+        
+}
+
+.link a {
+    margin-left: 5px;
+    text-decoration: none;
+    color: #E3E3E3;
+    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+.link{
+    margin-right: 40px;
+}
+
+.btnSpo{
+    border-radius: 50px;
+    height: 50px;
+    width: 50px;
+    border: none;
+    background-color: #234C6A;
+    margin: 15px;
+    color: #E3E3E3;
+    cursor: pointer;
+}
+.socialSvgS{
+    display: inline-block;
+}
+.btnSpo:hover, .btnSpo:active{
+    background-color: rgba(57, 177, 83, 0.747);
+    border: none;
+    transition-duration: 0.3s;
+
+}
+    
+
+.btnIns{
+    border-radius: 50px;
+    height: 50px;
+    width: 50px;
+    border: none;
+    background-color: #234C6A;
+    color: #E3E3E3;
+    cursor: pointer;
+
+}
+.socialSvgI{
+    display: inline-block;
+}
+.btnIns:hover, .btnIns:active{
+    background-color: rgba(218, 24, 105, 0.747);
+    border: none;
+    transition-duration: 0.3s;
+
+}
+    
+.btnWha{
+    border-radius: 50px;
+    height: 50px;
+    width: 50px;
+    border: none;
+    background-color: #234C6A;
+    margin: 15px;
+    color: #E3E3E3;
+    cursor: pointer;
+}
+.socialSvgW{
+    display: inline-block;
+}
+.btnWha:hover, .btnWha:active{
+    background-color: rgba(51, 124, 22, 0.747);
+    border: none;
+    transition-duration: 0.3s;
+
+}
+.btnSpo:hover >.socialSvgS {
+  animation: scale 0.35s ease-out forwards ;
+}
+.btnIns:hover >.socialSvgI {
+  animation: scale 0.35s ease-out forwards ;
+}
+.btnWha:hover >.socialSvgW {
+  animation: scale 0.35s ease-out forwards ;
+}
+@keyframes scale {
+  0% {
+    transform: translateY(0px);
+
+  }
+
+  100% {
+    transform: translateY(-5px);
+
+    
+  }
+}
+.btnIns:active,
+.btnWha:active, 
+.btnSpo:active{
+    animation: click 0.2s;
+
+}
+@keyframes click {
+    0%{height: 50px; width: 50px; }
+    100%{height: 45px; width: 45px; }
+}
+
+
+
+
+
+
+
+
+/* Kleine Bildschirme */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+    .SocialMediaSum {
+        margin: 5px 0;
+    }
+    .link {
+        text-align: center;
+        margin: 5px 0;
+    }
+    .link a {
+        margin: 0 5px;
+        display: inline-block;
+    }
+}
