@@ -1,3 +1,18 @@
+//smotth scroll
+const lenis = new Lenis({
+  duration: 1.2,
+  smoothWheel: true
+})
+
+function raf(time) {
+  lenis.raf(time)
+  requestAnimationFrame(raf)
+}
+
+requestAnimationFrame(raf)
+
+
+
 let lastScrollY = window.scrollY;
 const navbar = document.getElementById("navbar");
 
@@ -81,10 +96,149 @@ window.addEventListener("scroll", () => {
 
     // Transform kombinieren
     card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
-
-
+// optional
+    card.style.transition = `
+  transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+  width 0.4s ease,
+  height 0.4s ease
+`;
+//optional
 
 
 
 
 });
+// play/pause animation
+const triangle = document.querySelector('.playTriangle');
+triangle.addEventListener('click', ()=> {
+    triangle.classList.toggle('active');
+
+});
+let lastScroll = window.scrollY;
+let frequencyOffset = 0;
+
+window.addEventListener("scroll", () => {
+    const current = window.scrollY;
+    const delta = Math.abs(current - lastScroll);
+
+    // Je schneller gescrollt wird → desto stärker der Effekt
+    frequencyOffset += delta * 0.15;
+
+    document.querySelector('.frequency-bg').style.backgroundPositionY =
+        frequencyOffset + "px";
+
+    lastScroll = current;
+});
+
+
+document.querySelectorAll('.w-bubble').forEach(bubble => {
+  bubble.addEventListener('click', () => {
+
+    // Wenn offen → schließen
+    if (bubble.classList.contains('expanded')) {
+
+      bubble.classList.add('closing');
+      bubble.classList.remove('expanded');
+
+      setTimeout(() => {
+        bubble.classList.remove('closing');
+      }, 600);
+
+      return;
+    }
+
+    // Andere schließen
+    document.querySelectorAll('.w-bubble.expanded')
+      .forEach(b => {
+        b.classList.remove('expanded');
+        b.classList.add('closing');
+        setTimeout(() => b.classList.remove('closing'), 600);
+      });
+
+    // Diese öffnen
+    bubble.classList.add('expanded');
+  });
+});
+const panels = document.querySelectorAll(".section-panel");
+
+window.addEventListener("scroll", () => {
+  const windowH = window.innerHeight;
+
+  panels.forEach(panel => {
+    const rect = panel.getBoundingClientRect();
+
+    // 0 = Section noch nicht da
+    // 1 = Section komplett im View
+    const progress = 2 - Math.min(Math.max(rect.top / windowH, 0), 1);
+
+    // Licht wird schwächer je weiter man scrollt
+    const lightStrength = 2 - progress;
+
+    panel.style.setProperty("--light-opacity", lightStrength);
+  });
+});
+const titles = document.querySelectorAll('.section-title');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('reveal');
+    }
+  });
+}, {
+  threshold: 0.4
+});
+
+titles.forEach(title => observer.observe(title));
+
+function updateBubbles() {
+  const windowH = window.innerHeight;
+
+  document.querySelectorAll('.w-bubble-wrapper').forEach(wrapper => {
+    const rect = wrapper.getBoundingClientRect();
+
+    // Sichtbarkeit: 0 = komplett oben, 1 = komplett im View
+    let progress = 1 - Math.min(Math.max(rect.top / windowH, 0), 1);
+
+    // Optional: kleiner Schwellwert, damit Fade-In erst ab 10% sichtbar startet
+    if(progress > 0.1) {
+      wrapper.style.opacity = progress;             // Opacity
+      wrapper.style.transform = `translateY(${30*(1-progress)}px)`; // Slide
+    } else {
+      wrapper.style.opacity = 0;
+      wrapper.style.transform = `translateY(30px)`;
+    }
+  });
+}
+const bubbleObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const wrapper = entry.target;
+
+      // Bubble sichtbar machen
+      wrapper.classList.add("reveal");
+
+      // Wenn das die erste Bubble ist → Frequenz starten
+      if (wrapper.classList.contains("seed-1")) {
+        setTimeout(() => {
+          document.querySelectorAll(".frequency").forEach(freq => {
+            freq.classList.add("show");
+          });
+        }, 800); // 2 Sekunden warten
+      }
+    }
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll(".w-bubble-wrapper")
+  .forEach(b => bubbleObserver.observe(b));
+
+
+
+
+
+
+
+
+
+

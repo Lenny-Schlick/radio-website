@@ -10,10 +10,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+<div class="w-light"></div>
 
         <header id="navbar">
 <a href="index.html" class="logo-link">
-    <p class="LogoText">Hecht Radio</p>
+    <p class="LogoText">HechtRadio</p>
 </a>
 
             <div class="SocialMediaSum">
@@ -41,18 +42,21 @@
         </header>
 
     <main>
+            <div class="frequency-bg"></div>
+          <div class="section-intro">
+        <section class="section-panel hero-panel">
         <div class="mainLogoContainer">
             <img src="assets/images/HechtRadio-Logo_Rechteck-unv(2).png" alt="hechtradio-Logo" class="mainLogo">
 
         </div>
                    <div class="mainLogoText"><p >Deine Musik. Dein Erlebnis.</p></div> 
+              </section>
+          </div>
 
-
-
-
-    <section class="zoom-section">
-    <div class="zoom-card">
-        <h2 class="zoom-title">Aktuelle <br> &nbsp;  Sendung</h2>
+    <section class="zoom-section section-panel show-panel">
+    <div class="zoom-card" id="zoom-card">
+        <h2 class="zoom-title section">Aktuelle <br> &nbsp;  Sendung</h2>
+        <p class="zoom-info">Jetzt die neueste Sendung anhören. Arthur Gramsch präsentiert Ihnen:</p>
         <p class="zoom-date">12. Januar 2025</p>
         <div class="playContainer">
              <div class="playCircle"></div>
@@ -62,13 +66,97 @@
 
  
     </div>
+      <div class="w-light">
     </section>
+    <br>
+    <br>
+    <br>
+
+        <h2 class="w-headline section-title">
+  Unsere Frequenz
+</h2>
+
+<section class="w-section section-panel w-panel">
+  <div class="bubble-bg"></div>
+  <div class="w-bubbles">
+
+    <div class="w-bubble-wrapper seed-1">
+
+  <div class="frequency">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <button class="w-bubble">
+    <div class="bubble-inner"> <span class="w-label">WAS?</span> </div>
+    <div class="w-info"> HechtRadio ist ein ehrenamtlich betriebens Lokalradio. Im Mittelpunkt steht die Musik: ein abwechslungsreicher Mix verschiedener Genres mit einem klaren Schwerpunkt auf Pop. </div>
+  </button>
+
+</div>
+
+
+   <div class="w-bubble-wrapper seed-2">
+
+  <div class="frequency">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <button class="w-bubble">
+    <span class="w-label">WIE?</span>
+        <div class="w-info">HechtRadio wird direkt in unserem Studio in der Dresdner Neustadt produziert. Dort erstellen und bearbeiten alle Beiträge selbst und gestalten das programm eigenständig</div>
+  </button>
+
+</div>
+
+
+    <div class="w-bubble-wrapper seed-3 ">
+
+  <div class="frequency">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <button class="w-bubble">
+    <span class="w-label">WARUM?</span>
+            <div class="w-info"> Seit Januar 2025 produzieren wir ein eigenes Radioprogramm mit dem Anspruch, das Medium Radio zeitgemäß und lokalrelevant zu gestalten</div>
+  </button>
+
+</div>
+
+
+   <div class="w-bubble-wrapper seed-4 ">
+
+  <div class="frequency">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <button class="w-bubble">
+    <span class="w-label">WO?</span>
+      <div class="w-info">Sie finden uns auch über unsere Social-Media-Kanäle, sowie unseren WhatsApp-Channel. Alle Sednungen können sie auf unserer Website hören, zudem senden wir wir auch regelmäßig bei coloRadio.</div>
+
+  </button>
+
+</div>
+
+
+  </div>
+</section>
+</div>
+
+
 
 
     </main>
     <footer>
 
     </footer>
+    <script src="https://unpkg.com/@studio-freight/lenis"></script>
     <script src="script.js"></script>
 </body>
 </html>
