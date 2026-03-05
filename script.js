@@ -6,7 +6,8 @@ const lenis = new Lenis({
 
 function raf(time) {
   lenis.raf(time)
-  requestAnimationFrame(raf)
+  updateSponsorScroll();
+  requestAnimationFrame(raf);
 }
 
 requestAnimationFrame(raf)
@@ -233,8 +234,114 @@ const bubbleObserver = new IntersectionObserver(entries => {
 document.querySelectorAll(".w-bubble-wrapper")
   .forEach(b => bubbleObserver.observe(b));
 
+function updateSponsorScroll() {
+  const section = document.querySelector('.sponsor-section');
+  const track = document.querySelector('.sponsor-track');
+  const firstCard = track.querySelector('.sponsor-card');
+
+  if (!section || !track || !firstCard) return;
+
+  const scrollY = window.scrollY;
+  const windowH = window.innerHeight;
+
+  const sectionTop = section.offsetTop;
+  const sectionHeight = section.offsetHeight;
+
+  // Wie viel Platz vor dem Start (Premium-Pause)
+  const START_PADDING = 120;
+
+  // Startpunkt: erstes Logo komplett sichtbar + Luft
+  const start =
+    sectionTop +
+    firstCard.offsetLeft -
+    START_PADDING;
+
+  const end =
+    sectionTop +
+    sectionHeight -
+    windowH;
+
+  const maxTranslate = track.scrollWidth - window.innerWidth;
+
+  // 🔑 Basis-Translate (WICHTIG gegen Jump)
+  let translateX = 0;
+
+  if (scrollY <= start) {
+    translateX = 0;
+  } else if (scrollY >= end) {
+    translateX = -maxTranslate;
+  } else {
+    const progress = (scrollY - start) / (end - start);
+
+    // Smooth Ease (butterweich)
+    const eased = progress * progress * (3 - 2 * progress);
+
+    translateX = -eased * maxTranslate;
+  }
+
+  track.style.transform = `translate3d(${translateX}px, 0, 0)`;
+}
+
+window.addEventListener("scroll", updateSponsorScroll);
+updateSponsorScroll();
+
+function revealSponsorTitle() {
+  const section = document.querySelector('.sponsor-section');
+  const rect = section.getBoundingClientRect();
+  if (rect.top < window.innerHeight * 0.7) {
+    section.classList.add('reveal');
+  }
+}
+
+window.addEventListener('scroll', revealSponsorTitle);
+revealSponsorTitle();
+
+function revealSponsorCards() {
+  const cards = document.querySelectorAll('.sponsor-card');
+  cards.forEach((card, i) => {
+    const rect = card.getBoundingClientRect();
+    if (rect.left < window.innerWidth ) {
+      card.classList.add('visible');
+      card.style.transitionDelay = `${i * 0.1}s`;
+    }
+  });
+}
+
+window.addEventListener('scroll', revealSponsorCards);
+revealSponsorCards();
 
 
+
+const playContainer = document.querySelector('.playContainer');
+const bars = document.querySelectorAll('.wave span');
+
+let interval;
+
+playContainer.addEventListener('click', () => {
+  playContainer.classList.toggle('is-playing');
+
+  if (playContainer.classList.contains('is-playing')) {
+    startWave();
+  } else {
+    stopWave();
+  }
+});
+
+function startWave() {
+  interval = setInterval(() => {
+    bars.forEach(bar => {
+      const randomScale = (Math.random() * 1.6) + 0.4;
+      bar.style.transform = `scaleY(${randomScale})`;
+    });
+  }, 160);
+}
+
+function stopWave() {
+  clearInterval(interval);
+  bars.forEach(bar => {
+    bar.style.transform = `scaleY(1)`;
+  });
+}
 
 
 
